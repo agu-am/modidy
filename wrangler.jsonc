@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "modidy",
+  "main": "open-next/worker.js",
+  "compatibility_date": "2026-08-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    { "pattern": "modidy.com", "zone_name": "modidy.com" },
+    { "pattern": "www.modidy.com", "zone_name": "modidy.com" },
+    { "pattern": "*.modidy.com/*", "zone_name": "modidy.com" }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

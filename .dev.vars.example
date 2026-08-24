@@ -1,0 +1,5 @@
+# Variables para `wrangler dev` / opennextjs-cloudflare preview
+# Copia este archivo a .dev.vars
+DATABASE_URL=
+NEXT_PUBLIC_ROOT_DOMAIN=modidy.com
+ADMIN_PASSWORD=cambia-esto
