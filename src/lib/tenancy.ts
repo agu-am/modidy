@@ -1,14 +1,10 @@
-import { and, asc, eq } from "drizzle-orm";
-import { getDb } from "@/db";
 import {
-  modules as modulesTable,
-  pages,
-  sections,
-  tenantModules,
-  tenants,
-  type Section,
-  type Tenant,
-} from "@/db/schema";
+  getActiveTenantBySlug,
+  getHomePageId,
+  getModuleStates,
+  listSections,
+} from "@/db/rest";
+import type { Section, Tenant } from "@/db/schema";
 
 export type SiteData = {
   tenant: Tenant;
@@ -17,39 +13,23 @@ export type SiteData = {
 };
 
 export async function getSiteData(slug: string): Promise<SiteData | null> {
-  const db = getDb();
-
-  const [tenant] = await db
-    .select()
-    .from(tenants)
-    .where(and(eq(tenants.slug, slug), eq(tenants.status, "active")))
-    .limit(1);
-
+  const tenant = await getActiveTenantBySlug(slug);
   if (!tenant) return null;
 
-  const [page] = await db
-    .select()
-    .from(pages)
-    .where(and(eq(pages.tenantId, tenant.id), eq(pages.slug, "home")))
-    .limit(1);
+  const pageId = await getHomePageId(tenant.id);
 
-  const siteSections = page
-    ? await db
-        .select()
-        .from(sections)
-        .where(and(eq(sections.pageId, page.id), eq(sections.visible, true)))
-        .orderBy(asc(sections.position))
-    : [];
+  const siteSections = pageId ? await listSections(pageId, true) : [];
 
-  const active = await db
-    .select({ moduleId: tenantModules.moduleId })
-    .from(tenantModules)
-    .innerJoin(modulesTable, eq(modulesTable.id, tenantModules.moduleId))
-    .where(and(eq(tenantModules.tenantId, tenant.id), eq(tenantModules.enabled, true)));
+  const states = await getModuleStates(tenant.id);
 
   return {
     tenant,
     sections: siteSections,
-    activeModules: active.map((m) => m.moduleId),
+    activeModules: states.filter((m) => m.enabled).map((m) => m.moduleId),
   };
+}
+
+export async function isModuleActive(tenantId: string, moduleId: string): Promise<boolean> {
+  const states = await getModuleStates(tenantId);
+  return states.some((m) => m.moduleId === moduleId && m.enabled);
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SubmitButton } from "@/components/admin/submit-button";
 import { createTenant } from "../actions";
 
 export default function NewTenantPage({
@@ -96,12 +97,11 @@ async function NewTenantForm({
           </div>
         </div>
 
-        <button
-          type="submit"
+        <SubmitButton
           className="w-full rounded-full bg-sky-600 py-3 text-sm font-semibold text-white transition hover:bg-sky-500"
         >
           Crear sitio
-        </button>
+        </SubmitButton>
       </form>
     </div>
   );

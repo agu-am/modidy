@@ -1,6 +1,6 @@
 import { eq, sql } from "drizzle-orm";
 import { getDb } from "@/db";
-import { memberships, modules, pages, sections, tenantModules, tenants, users } from "@/db/schema";
+import { memberships, modules, pages, posts, sections, tenantModules, tenants, users } from "@/db/schema";
 import { MODULE_CATALOG } from "@/modules/registry";
 
 try {
@@ -161,9 +161,51 @@ async function main() {
     .values([
       { tenantId, moduleId: "contact" },
       { tenantId, moduleId: "loyalty" },
+      { tenantId, moduleId: "blog" },
     ])
     .onConflictDoNothing();
-  console.log("✔ Módulos activados para demo: contact, loyalty");
+  console.log("✔ Módulos activados para demo: contact, loyalty, blog");
+
+  // 5b. Publicaciones de ejemplo del blog (solo si no hay ninguna)
+  const existingPosts = await db
+    .select({ id: posts.id })
+    .from(posts)
+    .where(eq(posts.tenantId, tenantId));
+
+  if (existingPosts.length === 0) {
+    await db.insert(posts).values([
+      {
+        tenantId,
+        slug: "bienvenida-a-nuestro-blog",
+        title: "Bienvenida a nuestro blog",
+        excerpt: "Estrenamos sección de novedades: acá vas a encontrar noticias, tips y anuncios.",
+        body: "Hoy estrenamos el blog de Demo Store.\n\nAcá vamos a compartir noticias del negocio, consejos útiles y todos los anuncios importantes.\n\nVolvé pronto que hay más contenido en camino.",
+        category: "Novedades",
+        published: true,
+      },
+      {
+        tenantId,
+        slug: "como-elegir-el-servicio-ideal",
+        title: "Cómo elegir el servicio ideal para vos",
+        excerpt: "Tres claves simples para tomar la mejor decisión antes de contratar.",
+        body: "Elegir bien la primera vez ahorra tiempo y plata.\n\nPrimero, definí qué problema real querés resolver. Segundo, compará opciones por valor, no solo por precio. Tercero, preguntá siempre por casos de éxito.\n\nSi tenés dudas, escribinos: te ayudamos a elegir.",
+        category: "Guías",
+        published: true,
+      },
+      {
+        tenantId,
+        slug: "borrador-en-progreso",
+        title: "Borrador: próxima campaña",
+        excerpt: "Este post está en borrador y todavía no es visible públicamente.",
+        body: "Contenido en preparación.",
+        category: "Interno",
+        published: false,
+      },
+    ]);
+    console.log("✔ 3 publicaciones de blog creadas para demo (2 publicadas, 1 borrador)");
+  } else {
+    console.log("• El blog ya tiene publicaciones, se omiten");
+  }
 
   // 6. Usuario owner del tenant demo
   const [owner] = await db

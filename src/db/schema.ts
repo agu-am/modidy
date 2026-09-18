@@ -19,6 +19,8 @@ export const tenants = pgTable("tenants", {
     .$type<{ primary?: string; footerText?: string }>()
     .notNull()
     .default({}),
+  design: jsonb("design").$type<Record<string, unknown>>().notNull().default({}),
+  previousDesign: jsonb("previous_design").$type<Record<string, unknown> | null>(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
@@ -127,6 +129,32 @@ export const leads = pgTable("leads", {
     .defaultNow(),
 });
 
+export const posts = pgTable(
+  "posts",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    slug: text("slug").notNull(),
+    title: text("title").notNull(),
+    excerpt: text("excerpt").notNull().default(""),
+    body: text("body").notNull().default(""),
+    category: text("category").notNull().default(""),
+    published: boolean("published").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => [uniqueIndex("posts_tenant_slug_unique").on(t.tenantId, t.slug)],
+);
+
 export type Tenant = typeof tenants.$inferSelect;
 export type Section = typeof sections.$inferSelect;
 export type ModuleRow = typeof modules.$inferSelect;
+export type Post = typeof posts.$inferSelect;
+export type Lead = typeof leads.$inferSelect;
+export type Membership = typeof memberships.$inferSelect;

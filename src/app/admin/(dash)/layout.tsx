@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { logout } from "../actions";
+import { LogoutButton } from "@/components/admin/logout-button";
 
 export default async function AdminDashLayout({ children }: LayoutProps<"/admin">) {
   if (!(await isAdminAuthenticated())) {
@@ -16,14 +16,7 @@ export default async function AdminDashLayout({ children }: LayoutProps<"/admin"
             modidy<span className="text-sky-500">.</span>{" "}
             <span className="ml-1 text-xs font-normal text-gray-400">admin</span>
           </Link>
-          <form action={logout}>
-            <button
-              type="submit"
-              className="rounded-full border border-gray-200 px-4 py-1.5 text-xs font-medium text-gray-600 transition hover:bg-gray-50"
-            >
-              Salir
-            </button>
-          </form>
+          <LogoutButton />
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>

@@ -1,8 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { getDb } from "@/db";
-import { leads } from "@/db/schema";
+import { insertLead } from "@/db/rest";
 
 export async function submitLead(
   tenantId: string,
@@ -14,11 +13,10 @@ export async function submitLead(
   const message = String(formData.get("message") ?? "").trim();
 
   if (!name || !email) {
-    redirect(`/s/${tenantSlug}/?error=1`);
+    redirect("/?error=1");
   }
 
-  const db = getDb();
-  await db.insert(leads).values({ tenantId, name, email, message });
+  await insertLead({ tenantId, name, email, message });
 
-  redirect(`/s/${tenantSlug}/?enviado=1`);
+  redirect("/?enviado=1");
 }

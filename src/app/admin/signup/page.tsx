@@ -1,13 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createBrowserClient } from "@supabase/ssr";
 
-export default function AdminLoginPage() {
+export default function AdminSignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupForm />
+    </Suspense>
+  );
+}
+
+function SignupForm() {
   const router = useRouter();
+  const design = useSearchParams().get("design");
   const [error, setError] = useState<string | null>(null);
+  const [pendingConfirm, setPendingConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -17,8 +27,13 @@ export default function AdminLoginPage() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const email = String(formData.get("email") ?? "");
+      const email = String(formData.get("email") ?? "").trim();
       const password = String(formData.get("password") ?? "");
+
+      if (password.length < 8) {
+        setError("La contraseña debe tener al menos 8 caracteres.");
+        return;
+      }
 
       const cookieDomain =
         typeof window !== "undefined" && /\.modidy\.com$/.test(window.location.hostname)
@@ -31,9 +46,14 @@ export default function AdminLoginPage() {
         { cookieOptions: { domain: cookieDomain } }
       );
 
-      const { error: authError } = await supabase.auth.signInWithPassword({
+      const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/admin/confirm${
+            design ? `?design=${encodeURIComponent(design)}` : ""
+          }`,
+        },
       });
 
       if (authError) {
@@ -41,14 +61,41 @@ export default function AdminLoginPage() {
         return;
       }
 
-      router.replace("/admin");
+      if (!data.session) {
+        setPendingConfirm(true);
+        return;
+      }
+
+      // Si viene de un diseño concreto, lo creamos automáticamente
+      const dest = design ? `/admin/setup?design=${encodeURIComponent(design)}` : "/admin";
+      router.replace(dest);
       router.refresh();
     } catch (err) {
-      console.error("Login error:", err);
-      setError("Error inesperado al iniciar sesión");
+      console.error("Signup error:", err);
+      setError("Error inesperado al crear la cuenta");
     } finally {
       setLoading(false);
     }
+  }
+
+  if (pendingConfirm) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="w-full max-w-md rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-sm">
+          <p className="text-3xl">📬</p>
+          <h1 className="mt-3 text-xl font-bold text-gray-900">Confirma tu correo</h1>
+          <p className="mt-2 text-sm text-gray-500">
+            Te enviamos un enlace de confirmación. Al confirmarlo vas a poder iniciar sesión.
+          </p>
+          <Link
+            href="/admin/login"
+            className="mt-6 inline-block rounded-full bg-sky-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-400"
+          >
+            Ir a iniciar sesión
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -57,15 +104,13 @@ export default function AdminLoginPage() {
         onSubmit={handleSubmit}
         className="w-full max-w-md rounded-2xl border border-gray-100 bg-white p-8 shadow-sm"
       >
-        <h2 className="text-2xl font-bold text-gray-900">Panel de Administración</h2>
+        <h2 className="text-2xl font-bold text-gray-900">Creá tu cuenta</h2>
         <p className="mt-2 text-sm text-gray-500">
-          Accede con tu correo y contraseña de Supabase
+          Registráte para crear y administrar tu sitio web.
         </p>
 
         {error && (
-          <div className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-700">
-            {error}
-          </div>
+          <div className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</div>
         )}
 
         <div className="mt-6 space-y-4">
@@ -91,7 +136,8 @@ export default function AdminLoginPage() {
               type="password"
               name="password"
               required
-              placeholder="••••••••"
+              minLength={8}
+              placeholder="Mínimo 8 caracteres"
               className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-sky-500"
             />
           </div>
@@ -100,23 +146,14 @@ export default function AdminLoginPage() {
             disabled={loading}
             className="w-full rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-400 disabled:opacity-60"
           >
-            {loading ? "Ingresando..." : "Iniciar sesión"}
+            {loading ? "Creando cuenta..." : "Crear cuenta"}
           </button>
         </div>
 
-        <div className="mt-4 text-center">
-          <Link
-            href="/admin/forgot-password"
-            className="text-sm font-medium text-sky-600 hover:text-sky-500"
-          >
-            ¿Olvidaste tu contraseña?
-          </Link>
-        </div>
-
         <p className="mt-6 text-center text-sm text-gray-500">
-          ¿No tenés cuenta?{" "}
-          <Link href="/admin/signup" className="font-medium text-sky-600 hover:text-sky-500">
-            Registrate
+          ¿Ya tenés cuenta?{" "}
+          <Link href="/admin/login" className="font-medium text-sky-600 hover:text-sky-500">
+            Iniciar sesión
           </Link>
         </p>
       </form>

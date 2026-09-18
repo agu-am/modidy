@@ -31,13 +31,20 @@ export default function MarketingPage() {
           <nav className="hidden gap-6 text-sm text-gray-600 sm:flex">
             <a href="#modulos" className="hover:text-gray-900">Módulos</a>
             <a href="#como-funciona" className="hover:text-gray-900">Cómo funciona</a>
+            <Link href="/templates" className="hover:text-gray-900">Templates</Link>
           </nav>
           <a
-            href="#contacto"
+            href="/admin/login"
+            className="hidden text-sm font-medium text-gray-600 transition hover:text-gray-900 sm:block"
+          >
+            Iniciar sesión
+          </a>
+          <Link
+            href="/admin/signup"
             className="rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700"
           >
-            Empezar
-          </a>
+            Empezar gratis
+          </Link>
         </div>
       </header>
 
@@ -67,12 +74,12 @@ export default function MarketingPage() {
             ritmo: blog, tienda con pagos, reservas, fidelización y más.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#contacto"
+            <Link
+              href="/admin/signup"
               className="rounded-full bg-sky-500 px-7 py-3.5 text-sm font-semibold shadow-lg shadow-sky-500/25 transition hover:bg-sky-400"
             >
-              Quiero mi web
-            </a>
+              Crear mi web gratis
+            </Link>
             <a
               href="#como-funciona"
               className="rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white/90 transition hover:bg-white/10"
@@ -131,33 +138,36 @@ export default function MarketingPage() {
         </div>
       </section>
 
-      {/* CTA + contacto */}
+      {/* CTA + registro */}
       <section id="contacto" className="mx-auto max-w-3xl px-4 py-24 text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           ¿Listo para lanzar tu web?
         </h2>
         <p className="mt-4 text-gray-600">
-          Escribinos y en una breve charla armamos la propuesta para tu negocio.
+          Registrate gratis, elegí un diseño y tu sitio queda online en{" "}
+          <span className="font-mono text-sm">tunombre.modidy.com</span> en minutos. Después
+          sumás módulos cuando quieras.
         </p>
-        <form
-          action="mailto:hola@modidy.com"
-          method="get"
-          className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row"
-        >
-          <input
-            type="email"
-            name="subject"
-            required
-            placeholder="Tu email"
-            className="w-full rounded-full border border-gray-200 px-5 py-3 text-sm outline-none focus:border-sky-500"
-          />
-          <button
-            type="submit"
-            className="shrink-0 rounded-full bg-gray-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-700"
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Link
+            href="/admin/signup"
+            className="w-full rounded-full bg-gray-900 px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-gray-700 sm:w-auto"
           >
-            Contactarme
-          </button>
-        </form>
+            Crear mi cuenta gratis
+          </Link>
+          <Link
+            href="/admin/login"
+            className="w-full rounded-full border border-gray-300 px-8 py-3.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 sm:w-auto"
+          >
+            Ya tengo cuenta
+          </Link>
+        </div>
+        <p className="mt-6 text-xs text-gray-400">
+          ¿Preferís que lo hagamos por vos? Escribinos a{" "}
+          <a href="mailto:hola@modidy.com" className="underline hover:text-gray-600">
+            hola@modidy.com
+          </a>
+        </p>
       </section>
 
       {/* Footer */}
