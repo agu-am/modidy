@@ -9,7 +9,7 @@ export function Pricing() {
           <span className="material-symbols-outlined text-sm">credit_card</span>
           <span className="font-bold">Membresías Flexibles Sin Compromiso</span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold font-syne text-white tracking-tight drop-shadow-lg">
+        <h2 className="text-3xl sm:text-5xl font-extrabold font-syne text-white tracking-tight drop-shadow-lg text-balance break-words">
           Planes de Suscripción Mensual &amp; Mantenimiento Continuo
         </h2>
         <p className="text-sm sm:text-base text-white/80 drop-shadow max-w-2xl mx-auto">
