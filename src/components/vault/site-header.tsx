@@ -18,7 +18,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#090a0d]/85 backdrop-blur-md transition-all">
+      <header className="site-header sticky top-0 z-50 w-full border-b border-white/10 bg-[#090a0d]/85 backdrop-blur-md transition-all">
         <div className="max-w-7xl mx-auto px-6 md:px-8 py-3.5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-5 shrink-0">
             <a
