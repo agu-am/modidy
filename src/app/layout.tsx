@@ -1,33 +1,48 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Space_Grotesk, Syne } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const syne = Syne({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["700", "800"],
+});
+
+const grotesk = Space_Grotesk({
+  variable: "--font-grotesk",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Modidy — Tu web profesional con subdominio propio",
-    template: "%s | Modidy",
-  },
+  title: "Modidy — Bóveda de Activos Digitales & Matriz de Traspaso Escrow",
   description:
-    "Creamos la web de tu empresa y le sumás módulos cuando quieras: blog, e-commerce, reservas, fidelización y más.",
+    "Modidy cura MVPs listos para producción, plataformas SaaS autónomas y código probado con traspaso legal inmediato de IP.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${jakarta.variable} ${syne.variable} ${grotesk.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+      {/* Icon font: next/font no soporta Material Symbols, se carga por link */}
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      />
+      <body className="bg-[#090a0d] text-white min-h-screen relative overflow-x-hidden font-sans selection:bg-[#fe4165] selection:text-white">
+        {children}
+      </body>
     </html>
   );
 }

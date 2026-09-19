@@ -1,21 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "modidy",
+  "name": "portfolio",
   "main": ".open-next/worker.js",
   "compatibility_date": "2024-09-23",
   "compatibility_flags": ["nodejs_compat"],
-  "vars": {
-    "COOKIE_DOMAIN": ".modidy.com"
-  },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "routes": [
-    { "pattern": "modidy.com/*", "zone_name": "modidy.com" },
-    { "pattern": "www.modidy.com/*", "zone_name": "modidy.com" },
-    { "pattern": "*.modidy.com/*", "zone_name": "modidy.com" }
-  ],
+  // TODO: cuando tengas dominio, agregá tus routes acá
+  // "routes": [{ "pattern": "tudominio.com/*", "zone_name": "tudominio.com" }],
   "observability": {
     "enabled": true
   }
