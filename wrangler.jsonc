@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "portfolio",
+  "name": "modidy",
   "main": ".open-next/worker.js",
   "compatibility_date": "2024-09-23",
   "compatibility_flags": ["nodejs_compat"],
@@ -8,8 +8,11 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  // TODO: cuando tengas dominio, agregá tus routes acá
-  // "routes": [{ "pattern": "tudominio.com/*", "zone_name": "tudominio.com" }],
+  "routes": [
+    { "pattern": "modidy.com/*", "zone_name": "modidy.com" },
+    { "pattern": "www.modidy.com/*", "zone_name": "modidy.com" },
+    { "pattern": "*.modidy.com/*", "zone_name": "modidy.com" }
+  ],
   "observability": {
     "enabled": true
   }
