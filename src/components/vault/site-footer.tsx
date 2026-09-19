@@ -15,7 +15,7 @@ export function SiteFooter() {
     <footer className="relative z-20 w-full border-t border-white/15 bg-[#08090b]/90 backdrop-blur-2xl px-6 md:px-12 lg:px-16 py-12">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div className="space-y-3 max-w-sm">
-          <VaultImg alt="Modidy" className="h-7 w-auto object-contain" src={LOGO_FOOTER} />
+          <VaultImg alt="Modidy" className="h-7 w-auto object-contain" src={LOGO_FOOTER} loading="eager" />
           <p className="text-xs text-white/60 leading-relaxed font-mono">
             La plataforma líder en intermediación y custodia legal de productos
             digitales llave en mano, prototipos MVP y activos de software

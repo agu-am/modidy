@@ -133,3 +133,18 @@ body {
   background: #fe4165;
   color: #ffffff;
 }
+
+/* En mobile se pausan los efectos más pesados de GPU (grano + auroras
+   animadas). El look queda igual en cada instante, pero el scroll va fluido. */
+@media (max-width: 768px) {
+  .noise-overlay {
+    display: none;
+  }
+  .animate-aurora-1,
+  .animate-aurora-2,
+  .animate-aurora-3,
+  .animate-particle-twinkle,
+  .animate-grain-jitter {
+    animation: none;
+  }
+}

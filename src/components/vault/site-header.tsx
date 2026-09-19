@@ -29,6 +29,7 @@ export function SiteHeader() {
                 alt="Modidy Logo"
                 className="h-7 w-auto object-contain"
                 src={LOGO_HEADER}
+                loading="eager"
               />
             </a>
           </div>
@@ -71,7 +72,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="flex items-center justify-between">
-          <VaultImg alt="Modidy" className="h-8 w-auto" src={LOGO_FOOTER} />
+          <VaultImg alt="Modidy" className="h-8 w-auto" src={LOGO_FOOTER} loading="eager" />
           <button
             aria-label="Cerrar Menú"
             className="text-white p-2"
