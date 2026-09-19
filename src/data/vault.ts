@@ -2,7 +2,7 @@
 
 // TODO: reemplazá las X por tu número real de WhatsApp (código país + área + número, sin + ni espacios)
 export const WHATSAPP_URL =
-  "https://wa.me/549XXXXXXXXXX?text=Hola%20modidy%2C%20quiero%20mi%20primera%20web%20para%20mi%20negocio.%20%C2%BFMe%20pas%C3%A1s%20info%3F";
+  "https://wa.me/549XXXXXXXXXX?text=Hola%20modidy%2C%20quiero%20mi%20primera%20p%C3%A1gina%20para%20mi%20negocio.%20%C2%BFMe%20pas%C3%A1s%20info%3F";
 
 export const LOGO_HEADER =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuDwZ-aasDTG4IiS0RPemQ27jwV_CUSH2zAoO7ARKXHZ05fVrON4NrxHIgA7YCvXC34QWGlbTF_fENJNLsj8bb7a39sEdBhyAxYxxaT3FyoB-SN53gqWIl8p2wAw-1N_DyH2VUzw0BMYE0o6gwWd7Ac2q95cB1aU3sS_P_GZa5VxAQiTuO3f-hBv4G2gyIi3o-UJEXW4mQgmP3B_PxI3IOG3DuKpcLdumNsCe8S6s65ovpcjUD2WoGOpoPbOAyYZxlIMFlNqD0bb24e3_w";

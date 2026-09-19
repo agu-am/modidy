@@ -106,11 +106,11 @@ export function Catalog() {
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/60 border border-[#fe4165]/60 mb-4 backdrop-blur-2xl shadow-xl">
             <span className="w-2.5 h-2.5 rounded-full bg-[#fe4165] shadow-[0_0_10px_#fe4165] animate-pulse" />
             <span className="font-mono text-xs uppercase tracking-widest text-white font-bold">
-              Webs para negocios que recién empiezan
+              Páginas para negocios que recién empiezan
             </span>
           </div>
           <h1 className="headline-brutal text-4xl sm:text-6xl md:text-7xl lg:text-[76px] leading-[0.95] uppercase font-extrabold text-white tracking-tight drop-shadow-2xl">
-            Tu primera web en días,{" "}
+            Tu primera página en días,{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffffff] via-[#ffb59c] to-[#fe7641] drop-shadow-[0_4px_16px_rgba(254,65,101,0.5)]">
               sin vueltas.
             </span>
@@ -126,7 +126,7 @@ export function Catalog() {
               rel="noopener noreferrer"
               className="rounded-full bg-gradient-to-r from-[#fe4165] via-[#f95406] to-[#fe7641] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#fe4165]/30 transition hover:brightness-110 active:scale-95"
             >
-              Quiero mi web
+              Quiero mi página
             </a>
             <a
               href="#demos"

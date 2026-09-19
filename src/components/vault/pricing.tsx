@@ -13,7 +13,7 @@ export function Pricing() {
           Planes de Suscripción Mensual &amp; Mantenimiento Continuo
         </h2>
         <p className="text-sm sm:text-base text-white/80 drop-shadow max-w-2xl mx-auto">
-          Mantenimiento mensual para que tu web ande, venda y crezca. Precio
+          Mantenimiento mensual para que tu página ande, venda y crezca. Precio
           cerrado, sin sorpresas.
         </p>
       </div>
@@ -130,7 +130,7 @@ export function Pricing() {
         })}
       </div>
       <p className="text-center text-[11px] font-mono text-white/40 max-w-2xl mx-auto">
-        Regla de oro: ningún plan incluye rediseño completo ni web nueva. Eso se
+        Regla de oro: ningún plan incluye rediseño completo ni página nueva. Eso se
         cotiza aparte.
       </p>
     </section>

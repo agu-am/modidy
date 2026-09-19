@@ -3,7 +3,7 @@ import { VaultImg } from "./vault-img";
 
 const links = [
   { href: "#demos", label: "Catálogo Demos" },
-  { href: "#reales", label: "Webs Reales" },
+  { href: "#reales", label: "Páginas Reales" },
   { href: "#suscripciones", label: "Suscripciones" },
   { href: "#escrow", label: "Protocolo Escrow" },
   { href: "#", label: "Términos de Servicio" },
