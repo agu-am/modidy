@@ -163,8 +163,14 @@ body {
   }
   /* Blur más barato en tarjetas solo en mobile. */
   .glass-card {
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(12, 14, 20, 0.97);
+  }
+  /* Las pills tampoco re-blurean por frame en mobile. */
+  .filter-pill {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
