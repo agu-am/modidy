@@ -26,11 +26,6 @@ export function Background() {
         <div className="absolute top-[12%] left-[30%] w-[45vw] h-[35vh] rounded-full bg-[#fe7641] opacity-75 blur-[95px] mix-blend-screen aurora-blob" />
         <div className="absolute top-[65%] right-[15%] w-[50vw] h-[40vh] rounded-full bg-[#fe4165] opacity-80 blur-[100px] mix-blend-screen aurora-blob" />
         <div className="tactile-mesh" />
-        <div className="absolute w-2 h-2 rounded-full bg-white top-[15%] left-[20%] animate-particle-twinkle shadow-[0_0_12px_#ffffff]" />
-        <div className="absolute w-2.5 h-2.5 rounded-full bg-[#ffeedd] top-[30%] left-[80%] animate-particle-twinkle [animation-delay:4.5s] shadow-[0_0_14px_#f95406]" />
-        <div className="absolute w-2 h-2 rounded-full bg-white top-[58%] left-[45%] animate-particle-twinkle [animation-delay:8.2s]" />
-        <div className="absolute w-3 h-3 rounded-full bg-[#ffb59b] top-[78%] left-[18%] animate-particle-twinkle [animation-delay:3.0s] shadow-[0_0_16px_#fe4165]" />
-        <div className="absolute w-2 h-2 rounded-full bg-white top-[88%] left-[85%] animate-particle-twinkle [animation-delay:6.5s] shadow-[0_0_10px_#ffffff]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none" />
       </div>
     </>

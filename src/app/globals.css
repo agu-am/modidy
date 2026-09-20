@@ -154,6 +154,13 @@ body {
   .aurora-blob {
     mix-blend-mode: normal;
   }
+  /* Auroras congeladas en mobile: la GPU del teléfono no mueve fullscreen
+     a 60fps; estático se ve igual en cada frame y el scroll va fluido. */
+  .animate-aurora-1,
+  .animate-aurora-2,
+  .animate-aurora-3 {
+    animation: none;
+  }
   /* Blur más barato en tarjetas solo en mobile. */
   .glass-card {
     backdrop-filter: blur(14px) saturate(140%);
